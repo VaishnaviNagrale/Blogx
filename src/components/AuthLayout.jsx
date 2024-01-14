@@ -25,7 +25,9 @@ export default function AuthLayout({children, authentication = true}) {
             navigate("/")
         }
         setLoader(false)
-    }, [authStatus, navigate, authentication])
+    }, [authStatus,
+         navigate,
+         authentication])
 
   return loader ? <h1>Loading...</h1> : <>{children}</>
 }
