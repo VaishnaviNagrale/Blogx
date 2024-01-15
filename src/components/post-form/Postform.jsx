@@ -26,7 +26,7 @@ export default function PostForm({ post }) {
                 dbService.deleteFile(post.fecturedImage);
             }
 
-            const dbPost = await dbService.updatePost(post.$id, {
+            const dbPost = await dbService.updatePost(post?.$id, {
                 ...data,
                 fecturedImage: file ? file.$id : undefined,
             });
@@ -35,12 +35,12 @@ export default function PostForm({ post }) {
                 navigate(`/post/${dbPost.$id}`);
             }
         } else {
-            const file = await dbService.uploadFile(data.image[0]);
+            const file = await dbService.uploadFile(data.image?.[0]);
 
             if (file) {
                 const fileId = file.$id;
                 data.fecturedImage = fileId;
-                const dbPost = await dbService.createPost({ ...data, userId: userData.$id });
+                const dbPost = await dbService.createPost({ ...data, userId: userData?.$id });
 
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
